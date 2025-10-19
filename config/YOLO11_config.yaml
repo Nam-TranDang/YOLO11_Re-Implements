@@ -1,0 +1,79 @@
+# Root dir for data path:
+root_dir: "~/data"
+
+# Data dirs
+data_dirs:
+  train:
+    - path: "/Invoice/SROIE2019/train"
+  test:
+    - path: "/Invoice/SROIE2019/test"
+
+# YOLO11 Config
+model:
+  variant: "yolo_v11_m"   # In Registry
+  nc: 1                   # Number of Class - Text detect task.
+  names: ['text']         # YOLO11 Class.
+
+# Img config
+input_dim:
+  channels: 3
+  height: 480
+  width: 480
+
+# Dataloader and training parameters
+training:
+  batch_size: 16
+  num_workers: 4
+  patience: 5
+  epochs: 100
+  save_dir: "~/Nam_YOLO11/checkpoints/YOLO11_Checkpoint"
+
+# Run at Nam_YOLO11 if not --> error: current working dir place error 
+
+# Loss params
+loss:
+  loss_type: "compute_loss"         # Use for "Get Loss Registry" & Use for Bounding Box Loss 
+  box: 7.500000000000000            # box loss gain
+  cls: 0.500000000000000            # cls loss gain
+  dfl: 1.500000000000000            # dfl loss gain
+
+# Optimize params
+optimizer:
+  use_ema: True                     # Use EMA for training 
+  optim_type: "sgd"                 # 'SGD' or 'AdamW' or others if registered
+  scheduler: "cosine_lr"            # Registered scheduler: cosine | linear
+  momentum: 0.9370000000            # SGD momentum/Adam beta1
+
+  weight_decay: 0.000500            # optimizer weight decay (5x10(-4))
+  warmup_epochs: 3.00000            # warmup epochs
+  min_lr: 0.000100000000            # initial learning rate
+  max_lr: 0.010000000000            # maximum learning rate
+
+
+
+# Augmented Params 
+augmentations:
+  # Probabilities: allow to choose mode (VD: nếu random = 0.1 --> thì dùng 2 mode augmented, rand = 0.25 dùng 1 mode, nếu rand < 0.3 không augmented)
+  # Nếu Set = 0 --> không augmented 
+  prob_perspective: 0.0             # Nếu probability < 0.2 --> thì dùng mode này 
+  prob_albumentations: 0.0          # Nếu probability < 0.3 --> thì dùng mode này 
+  
+  # 1. Random Perspective --> Rotate
+  degrees: 10.0      # image rotation (+/- deg)
+  translate: 0.10    # image translation (+/- fraction)
+  scale: 0.1         # image scale (+/- gain)
+  shear: 2.0         # image shear (+/- deg)
+  perspective: 0.0   # image perspective (+/- fraction), range 0-0.001
+
+
+  # 2. Albumentations-based augmentations
+  blur_limit: 3      # Kernel size for blur (e.g., 3x3)
+  clahe_clip_limit: 2.0
+  noise_stddev: 25.0
+  brightness_contrast_limit: 0.2
+  
+  # prob_hsv: 1.0  # Applied after perspective or albu if selected
+  # 3. HSV Color-Space Augmentation
+  # hsv_h: 0.015       # image HSV-Hue augmentation (fraction)
+  # hsv_s: 0.7         # image HSV-Saturation augmentation (fraction)
+  # hsv_v: 0.4         # image HSV-Value augmentation (fraction)
