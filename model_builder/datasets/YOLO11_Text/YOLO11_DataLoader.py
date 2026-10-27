@@ -1,4 +1,4 @@
-# cli run Module to test: python3 -m sgod_model_builder.datasets.YOLO11_Text.YOLO11_DataLoader
+# cli run Module to test: python3 -m .datasets.YOLO11_Text.YOLO11_DataLoader
 import argparse
 import yaml
 import os
