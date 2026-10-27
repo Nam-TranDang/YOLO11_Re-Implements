@@ -1,6 +1,6 @@
 ## YOLO11_Re-Implements with Pytorch
 
-Specialized for **text detection** tasks. Using a **Darknet-based** backbone for the YOLO11 architecture (version 2025 - 26).
+Specialized for **text detection** tasks. Using a **Darknet-based** backbone for the YOLO11 architecture (version 2025 - latest check 2026).
 
 --- 
 
